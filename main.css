@@ -1,12 +1,18 @@
 body {
     background-color: #0390AE;
-    height: 100%;
     font-family: arial, sans-serif;
+    height: 100%;
+    line-height: 0;
 }
 
 .container {
-    margin: auto;
+    margin: 100px auto;
     width: 600px;
+}
+
+#oscilloscope {
+    background-color: #464C52;
+    border: 1px solid black;
 }
 
 #keyboard {
