@@ -11,8 +11,9 @@ body {
 }
 
 #oscilloscope {
-    background-color: #464C52;
+    background-color: mediumvioletred;
     border: 1px solid black;
+    border-bottom: 0;
 }
 
 #keyboard {

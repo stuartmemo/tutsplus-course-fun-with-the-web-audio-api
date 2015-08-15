@@ -3,7 +3,7 @@ var context = new AudioContext(),
     squareOscillators = {},
     sawtoothOscillators = {},
     analyser = context.createAnalyser(),
-    timeData = new Uint8Array(analyser.frequencyBinCount),
+    waveData = new Uint8Array(analyser.frequencyBinCount),
     canvas = document.querySelector('#oscilloscope'),
     canvasContext = canvas.getContext('2d'),
     canvasHeight = 150,
@@ -47,7 +47,7 @@ keyboard.keyDown = function (note, frequency) {
     squareOsc.connect(gainNode);
     sawtoothOsc.connect(gainNode);
 
-    gainNode.connect(analyser)
+    gainNode.connect(analyser);
 };
 
 keyboard.keyUp = function (note, frequency) {
@@ -62,12 +62,11 @@ var barWidth = canvasWidth / analyser.frequencyBinCount;
 var draw = function () {
     requestAnimationFrame(function () {
         canvas.width = canvasWidth; // Clear the canvas on each frame
-        canvas.height = canvasHeight; // Clear the canvas on each frame
 
-        analyser.getByteTimeDomainData(timeData);
+        analyser.getByteTimeDomainData(waveData);
 
         for (var i = 0; i < analyser.frequencyBinCount; i++) {
-            var yPosition = timeData[i] / 256; // 1 is max 0 is min
+            var yPosition = waveData[i] / 256; // 1 is max 0 is min
 
             yPosition = yPosition * canvasHeight; //
             canvasContext.lineTo(i * barWidth, yPosition, 1, 1);
