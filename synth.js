@@ -57,7 +57,7 @@ keyboard.keyUp = function (note, frequency) {
     squareOscillators[note].disconnect();
 };
 
-var barWidth = canvasWidth / analyser.frequencyBinCount;
+var xWidth = canvasWidth / analyser.frequencyBinCount;
 
 var draw = function () {
     requestAnimationFrame(function () {
@@ -66,10 +66,11 @@ var draw = function () {
         analyser.getByteTimeDomainData(waveData);
 
         for (var i = 0; i < analyser.frequencyBinCount; i++) {
-            var yPosition = waveData[i] / 256; // 1 is max 0 is min
+            var yPosition = waveData[i] / 256; // 1 is max 0 is min,
+                xPosition = i * xWidth;
 
-            yPosition = yPosition * canvasHeight; //
-            canvasContext.lineTo(i * barWidth, yPosition, 1, 1);
+            yPosition = yPosition * canvasHeight;
+            canvasContext.lineTo(xPosition, yPosition);
         }
 
         canvasContext.strokeStyle = 'yellow';
